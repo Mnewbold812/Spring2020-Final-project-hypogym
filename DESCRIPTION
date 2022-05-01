@@ -1,0 +1,15 @@
+Package: HypoGymStats
+Title: Functions for statistical analysis of hypothetical data over time
+Version: 0.0.0.9000
+Authors@R: 
+    person("Matthew", "Newbold", , "mnewbold@usf.edu", role = c("aut", "cre"),
+           )
+Description: This package contains a set of datasets for a hypothetical small gym
+    and a series of functions. These functions serve to collect the data over time
+    and display them in both numeric and graphical form. These functions can be
+    applied to many different datasets. 
+Depends: R (>= 4.1.1)
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
