@@ -1,0 +1,102 @@
+---
+title: "Functions and examples for hypothetical gym"
+author: Matthew Newbold
+output: html_document
+---
+# Tenative Functions
+
+This document contains, as requested by the assignment, a series of functions 
+for R programing in relation to the final project that has been assigned for 
+the course. 
+The idea behind the functions is that the functions will be able to be fed a 
+dataset purporting to represent a fictional gym and the daily uses of various 
+resources in the gym over the course of a year for a five year period. The first
+function should allow for the generation of a yearly mean, with the second 
+hopefully allowing for a mean of all the years for a service at once. The final 
+function that I have currently written would hopefully allow me to take the 
+means for each year for each topic/data and then convert them into per-year 
+graphs, allowing for the data to be visually presented.   
+
+# Non-visual functions  
+
+## Various Services Use per Day by Quarter by Year    
+Note that, in order to have any given function listed here focus on a given 
+column, you need to specify when writing the inserted dataset, usually by adding 
+[,x] to the end, where x is the column you need to access. 
+```{r}
+DailyUsePerYearMean<-function(x){
+  x2030<-mean(x[1:4])
+  x2031<-mean(x[5:8])
+  x2032<-mean(x[9:12])
+  x2033<-mean(x[13:16])
+  x2034<-mean(x[17:20])
+  XDailyYearlyMeans<-cbind(x2030, x2031, x2032, x2033, x2034)
+  print(XDailyYearlyMeans)
+}
+```
+
+#example
+DailyUsePerYearMean(HypoGymDailyAveragesByQuarter[,1])
+ 
+## Generating Means for all columns 
+```{r}
+TheMeanColumnTotal<-function(x){
+  TheMeanColumnTotal<-colMeans(x)
+}
+```  
+
+# Visualization Tools  
+
+## Bar Graph of Service Means by Year  
+```{r}
+DailyUsesChart<-function(x){
+  M1<-DailyUsePerYearMean(x[,1])
+  M2<-DailyUsePerYearMean(x[,2])
+  M3<-DailyUsePerYearMean(x[,3])
+  M4<-DailyUsePerYearMean(x[,4])
+  M5<-DailyUsePerYearMean(x[,5])
+  M6<-DailyUsePerYearMean(x[,6])
+  barplot(M1, col = "black", main= "Member Sign-In Terminal Daily Use: Yearly Mean", xlab="Years")
+  barplot(M2, col = "darkgreen", main= "Daily Use of Bodybuilding Equipment: Yearly Mean", xlab="Years")
+  barplot(M3, col = "darkorchid1", main= "Daily Personal Trainer Appointments: Yearly Mean", xlab="Years")
+  barplot(M4, col = "firebrick1", main= "Daily Attendence of Children's Fitness class: Yearly Mean", xlab="Years")
+  barplot(M5, col = "gold", main= "Daily Use of Aerobics Equipment: Yearly Mean", xlab="Years")
+  barplot(M6, col = "hotpink", main= "Daily Use of Sign-In sheet for pool: Yearly Mean", xlab="Years")
+}
+```  
+
+## Line Graph of Service Means by Year
+Note that par allows one to edit the grid by which the chosen graphs are 
+assigned; the current grid has been chosen to establish maximum viewing comfort,
+but other adjustments might be neccesary based on user needs.
+
+```{r}
+HypoGYmSereisplot21<-function(x){
+    par(mfrow=c(2,3))
+    plot.ts(HypoGymDailyAveragesByQuarter[,1], col= "black", lwd= 2, main="Daily     Sign In Terminal Use", ylab= "Daily Average by quarter")
+    plot.ts(HypoGymDailyAveragesByQuarter[,2], col= "darkgreen", lwd= 2,    main="Daily Use of Bodybuilding Equipment", ylab= "Daily Average by quarter")
+    plot.ts(HypoGymDailyAveragesByQuarter[,3], col= "darkorchid1", lwd= 2,  main="Daily Personal Trainer Appointments", ylab= "Daily Average by quarter")
+    plot.ts(HypoGymDailyAveragesByQuarter[,4], col= "firebrick1", lwd= 2,       main="Daily Attendence of Children's Fitness Class", ylab= "Daily Average by  quarter")
+    plot.ts(HypoGymDailyAveragesByQuarter[,5], col= "gold", lwd= 2, main="Daily     Use of Aerobics Equipment", ylab= "Daily Average by quarter")
+    plot.ts(HypoGymDailyAveragesByQuarter[,6], col= "hotpink", lwd= 2,       main="Daily use of Sign In Sheet for Pool", ylab= "Daily Average by quarter")
+}
+```
+
+##Histograms of Service Means by Year
+```{r}
+hypogymboxplot<-function(x){
+    M1<-DailyUsePerYearMean(x[,1])
+    M2<-DailyUsePerYearMean(x[,2])
+    M3<-DailyUsePerYearMean(x[,3])
+    M4<-DailyUsePerYearMean(x[,4])
+    M5<-DailyUsePerYearMean(x[,5])
+    M6<-DailyUsePerYearMean(x[,6])
+    boxplot(M1, main= "Member Sign-In Terminal Daily Use: Yearly Mean", xlab="Years")
+    boxplot(M2, main= "Daily Use of Bodybuilding Equipment: Yearly Mean", xlab="Years")
+    boxplot(M3, main= "Daily Personal Trainer Appointments: Yearly Mean", xlab="Years")
+    boxplot(M4, main= "Daily Attendence of Children's Fitness class: Yearly Mean", xlab="Years")
+    boxplot(M5, main= "Daily Use of Aerobics Equipment: Yearly Mean", xlab="Years")
+    boxplot(M6, main= "Daily Use of Sign-In sheet for pool: Yearly Mean", xlab="Years")
+}
+```
+
