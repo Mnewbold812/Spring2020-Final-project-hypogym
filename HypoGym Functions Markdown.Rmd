@@ -21,7 +21,7 @@ graphs, allowing for the data to be visually presented.
 
 ## Various Services Use per Day by Quarter by Year    
 Note that, in order to have any given function listed here focus on a given 
-column, you need to specify when writing the inserted dataset, usually by adding 
+column (and DailyUsePerYearMean requires that you do), you need to specify when writing the inserted dataset, usually by adding 
 [,x] to the end, where x is the column you need to access. 
 ```{r}
 DailyUsePerYearMean<-function(x){
